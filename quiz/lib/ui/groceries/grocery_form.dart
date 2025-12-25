@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:uuid/uuid.dart';
+import '../../models/grocery.dart';
 import '../../models/grocery.dart';
 
 class NewItem extends StatefulWidget {
@@ -10,6 +11,7 @@ class NewItem extends StatefulWidget {
     return _NewItemState();
   }
 }
+Uuid id = const Uuid();
 
 class _NewItemState extends State<NewItem> {
 
@@ -47,6 +49,14 @@ class _NewItemState extends State<NewItem> {
 
   void onAdd() {
     // Will be implemented later - Create and return the new grocery
+    Grocery? newGrocery = Grocery(
+      id: id.v4(),
+      name: _nameController.text, 
+      quantity: int.parse(_quantityController.text), 
+      category: _selectedCategory
+    );
+    Navigator.of(context).pop<Grocery>(newGrocery);
+    
   }
 
   @override
